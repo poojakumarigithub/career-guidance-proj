@@ -10,7 +10,8 @@ export default function ResetPassword() {
           <form className="space-y-4">
             <div>
               <label className="block mb-1">Email Address</label>
-              <input type="email" className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400" placeholder="Enter your email"/>
+              <input type="email"  name="email"
+                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none" placeholder="Enter your email"/>
             </div>
             <button type="submit" className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700">Send Reset Link</button>
             <p className="text-sm text-center mt-4">

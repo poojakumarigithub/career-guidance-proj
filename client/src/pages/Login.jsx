@@ -8,13 +8,15 @@ export default function Login() {
         <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
           <h2 className="text-2xl font-bold text-center text-indigo-600 mb-6">Login</h2>
           <form className="space-y-4">
-            <div className="flex items-center border p-3 rounded-lg">
-              <i className="fas fa-user text-gray-400 mr-2"></i>
-              <input type="text" placeholder="Username" className="flex-1 outline-none"/>
+            <div>
+              <label className="block mb-1">Email</label>
+              <input type="email" placeholder="enter your email" name="email" 
+                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"/>
             </div>
-            <div className="flex items-center border p-3 rounded-lg">
-              <i className="fas fa-lock text-gray-400 mr-2"></i>
-              <input type="password" placeholder="Password" className="flex-1 outline-none"/>
+            <div>
+              <label className="block mb-1">Password</label>
+              <input type="password" placeholder="enter password" name="password" 
+                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"/>
             </div>
             <button type="submit" className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700">Login</button>
             <div className="flex justify-between text-sm mt-2">

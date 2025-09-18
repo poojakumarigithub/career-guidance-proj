@@ -31,9 +31,12 @@ export default function ContactUs() {
           {/* Right Side */}
           <form className="space-y-4">
             <h3 className="text-xl font-bold text-indigo-600">Contact Us</h3>
-            <input type="text" placeholder="Username" className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400"/>
-            <input type="email" placeholder="Email" className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400"/>
-            <textarea placeholder="Message" className="w-full p-3 border rounded-lg h-32 focus:ring-2 focus:ring-indigo-400"></textarea>
+            <input type="text" placeholder="Username" 
+                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"/>
+            <input type="email" placeholder="Email" 
+                className="w-full p-3 border rounded-lg focus:ring-2 outline-none focus:ring-indigo-400"/>
+            <textarea placeholder="Message" 
+                className="w-full p-3 border rounded-lg h-32 focus:ring-2 focus:ring-indigo-400 outline-none"></textarea>
             <button type="submit" className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700">Send</button>
           </form>
         </div>

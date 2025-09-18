@@ -10,15 +10,18 @@ export default function Register() {
           <form className="space-y-4">
             <div>
               <label className="block mb-1">Username</label>
-              <input type="text" className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400"/>
+              <input type="text"  placeholder="Username" name="username"
+                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"/>
             </div>
             <div>
               <label className="block mb-1">Email</label>
-              <input type="email" className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400"/>
+              <input type="email"  placeholder="register email here..." name="email"
+                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"/>
             </div>
             <div>
               <label className="block mb-1">Password</label>
-              <input type="password" className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400"/>
+              <input type="password"  placeholder="your psw..." name="password"
+                className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"/>
             </div>
             <button type="submit" className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700">Register</button>
           </form>

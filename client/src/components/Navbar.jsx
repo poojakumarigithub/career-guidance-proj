@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
   return (
     <div className="flex justify-between items-center px-6 py-4 shadow-md bg-white">
-      <div className="text-2xl font-bold text-indigo-600">Career.</div>
+      <div className="text-2xl font-bold text-indigo-600"><Link to='/'>Career.</Link></div>
       <ul className="flex gap-6">
         <li>
           <Link to="/" className="hover:text-indigo-500">Home</Link>
@@ -12,11 +12,11 @@ export default function Navbar() {
           <Link to="/about" className="hover:text-indigo-500">About</Link>
         </li>
         <li className="relative group">
-          <span className="cursor-pointer hover:text-indigo-500">
+          <span className="cursor-pointer hover:text-indigo-500 select-none">
             Services ▾
           </span>
-          <ul className="absolute hidden group-hover:block bg-white shadow-lg rounded-lg mt-2 p-2">
-            <li><Link to="/stroies" className="block px-4 py-2 hover:bg-indigo-100">Stories</Link></li>
+          <ul className="absolute left-0 hidden group-hover:block group-focus-within:block hover:block bg-white shadow-lg rounded-lg mt-2 p-2 z-10 min-w-[140px] text-left pointer-events-auto">
+            <li><Link to="/stories" className="block px-4 py-2 hover:bg-indigo-100">Stories</Link></li>
             <li><Link to="/mentor" className="block px-4 py-2 hover:bg-indigo-100">Mentor</Link></li>
             <li><Link to="/courses" className="block px-4 py-2 hover:bg-indigo-100">Courses</Link></li>
           </ul>
