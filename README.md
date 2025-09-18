@@ -62,13 +62,13 @@ Below are some visual highlights of the application:
 * Adding AI chatbot.
 * Providing courses link based on the recommendation.
 
-## Contributing
+## To run this :
+cd client
+npm run dev
 
-Contributions are welcome! Please fork the repository and submit a pull request for any improvements or bug fixes.
-
-## Contact
-
-For any queries, reach out to:
+cd server
+for 10th quiz : cd 10th -> server.py
+for 12th quiz: cd 12th -> app.py
 
 - **Pooja Kumari**
 - GitHub: [poojakumarigithub](https://github.com/poojakumarigithub)
