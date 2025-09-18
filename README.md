@@ -63,10 +63,10 @@ Below are some visual highlights of the application:
 * Providing courses link based on the recommendation.
 
 ## To run this :
-cd client
+cd client ->
 npm run dev
 
-cd server
+cd server ->
 for 10th quiz : cd 10th -> server.py
 for 12th quiz: cd 12th -> app.py
 
