@@ -39,6 +39,21 @@ A web-based system that helps students discover suitable career options based on
 
 <img width="1916" height="783" alt="Screenshot 2025-09-18 115146" src="https://github.com/user-attachments/assets/a51f782e-3b77-4936-aeb7-a7c783e82215" />
 
+<img width="1915" height="827" alt="Screenshot 2025-09-18 115519" src="https://github.com/user-attachments/assets/c007bfd2-c692-47d3-a5ad-b72d799633c9" />
+
+<img width="1114" height="886" alt="Screenshot 2025-06-25 151308" src="https://github.com/user-attachments/assets/2763cd8a-e5cb-4cb8-943c-3729443bd90c" />
+
+<img width="1017" height="832" alt="Screenshot 2025-06-25 151255" src="https://github.com/user-attachments/assets/aa0c6faa-59f2-4382-8694-fc23cb7eee7a" />
+
+<img width="1612" height="898" alt="Screenshot 2025-06-25 151157" src="https://github.com/user-attachments/assets/1de23d45-4535-4521-99df-83f56bdbb100" />
+
+<img width="1864" height="750" alt="Screenshot 2025-06-25 151031" src="https://github.com/user-attachments/assets/c10de9c6-0902-4063-a8dd-b1fa9cbefa9c" />
+
+<img width="1899" height="893" alt="Screenshot 2025-06-25 151012" src="https://github.com/user-attachments/assets/268ce81b-7f4b-4512-93ab-f13b67a7d81f" />
+
+<img width="1816" height="908" alt="Screenshot 2025-06-25 150948" src="https://github.com/user-attachments/assets/e715e599-ee79-4647-b295-80827e1cd430" />
+
+
 Below are some visual highlights of the application:
 
 
