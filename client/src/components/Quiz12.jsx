@@ -9,7 +9,10 @@ export default function Quiz12() {
   const [started, setStarted] = useState(false);
   const [selected, setSelected] = useState([]);
   const [finished, setFinished] = useState(false);
+  const [careerLinks, setCareerLinks] = useState([]);
+  const [result, setResult] = useState(null); // <-- new state for showing result card
 
+  // Fetch quiz features and degree-link data
   useEffect(() => {
     fetch("/quiz12Features.json")
       .then((res) => res.json())
@@ -17,6 +20,12 @@ export default function Quiz12() {
         setFeatures(data);
         setSelected(Array(data.length).fill(0));
       });
+
+    // coursesLinks.json contains degree -> link mapping for 12th quiz
+    fetch("/coursesLinks.json")
+      .then((res) => res.json())
+      .then((data) => setCareerLinks(data))
+      .catch(() => console.error("Could not load coursesLinks.json"));
   }, []);
 
   const toggleCard = (idx) => {
@@ -26,9 +35,7 @@ export default function Quiz12() {
   };
 
   const progress = selected.filter((v) => v === 1).length;
-  const progressPct = features.length
-    ? (progress / features.length) * 100
-    : 0;
+  const progressPct = features.length ? (progress / features.length) * 100 : 0;
 
   const startQuiz = () => {
     if (!username.trim() || !email.trim()) {
@@ -38,37 +45,118 @@ export default function Quiz12() {
     setStarted(true);
   };
 
+  // Normalize text for matching
+  const normalize = (str) =>
+    str.toLowerCase().replace(/[^a-z0-9]/g, "").trim();
+
   const submitQuiz = async (e) => {
     e.preventDefault();
     if (!selected.includes(1)) {
       alert("Please select at least one interest!");
       return;
     }
+
     try {
       const res = await fetch("http://localhost:5000/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, answers: selected }),
       });
+
       const data = await res.json();
-      if (data.career) {
-        const attempts =
-          JSON.parse(localStorage.getItem("careerAttempts")) || [];
-        attempts.push({
-          username,
-          email,
-          career: data.career,
-          date: new Date().toLocaleString(),
-        });
-        localStorage.setItem("careerAttempts", JSON.stringify(attempts));
-        alert(
-          `🎉 Congratulations, ${username}! Recommended career: ${data.career}`
-        );
-        setFinished(true);
-      } else {
+      if (!data.career) {
         alert("Server error: " + (data.error || "Try again"));
+        return;
       }
-    } catch {
+
+      const normalizedCareer = normalize(data.career);
+
+      // Keyword-based mapping
+      const keywordMap = {
+        computer: "B.Tech - Computer Science and Engineering",
+        software: "B.Tech - Computer Science and Engineering",
+        it: "B.Sc. - Information Technology",
+        civil: "B.Tech - Civil Engineering",
+        mechanical: "B.Tech - Mechanical Engineering",
+        electrical: "B.Tech - Electrical and Electronics Engineering",
+        electronics: "B.Tech - Electronics and Communication Engineering",
+        law: "Integrated Law Course - BA + LL.B",
+        journalism: "BJMC - Bachelor of Journalism and Mass Communication",
+        masscommunication: "BJMC - Bachelor of Journalism and Mass Communication",
+        fashion: "BFD - Bachelor of Fashion Designing",
+        design: "BVA - Bachelor of Visual Arts",
+        business: "BBA - Bachelor of Business Administration",
+        commerce: "B.Com - Bachelor of Commerce",
+        account: "CA - Chartered Accountancy",
+        companysecretary: "CS - Company Secretary",
+        architecture: "B.Arch - Bachelor of Architecture",
+        travel: "BTTM - Bachelor of Travel and Tourism Management",
+        history: "BA in History",
+        english: "BA in English",
+        hindi: "BA in Hindi",
+        economics: "BA in Economics",
+        education: "B.Ed.",
+        geology: "B.Sc - Applied Geology",
+        physics: "B.Sc - Physics",
+        chemistry: "B.Sc - Chemistry",
+        mathematics: "B.Sc - Mathematics",
+        pharma: "BPharma - Bachelor of Pharmacy",
+        dentist: "BDS - Bachelor of Dental Surgery",
+        doctor: "MBBS",
+        medical: "MBBS",
+        civilservice: "Civil Services",
+        event: "BEM - Bachelor of Event Management",
+        animation: "Animation, Graphics and Multimedia",
+      };
+
+      let matchedDegree = null;
+      for (const [keyword, degreeName] of Object.entries(keywordMap)) {
+        if (normalizedCareer.includes(keyword)) {
+          matchedDegree = degreeName;
+          break;
+        }
+      }
+
+      // Find YouTube link
+      let match = null;
+      if (matchedDegree) {
+        match = careerLinks.find(
+          (item) => normalize(item.degree) === normalize(matchedDegree)
+        );
+      } else {
+        match = careerLinks.find((item) => {
+          const normalizedDegree = normalize(item.degree);
+          return (
+            normalizedCareer.includes(normalizedDegree) ||
+            normalizedDegree.includes(normalizedCareer)
+          );
+        });
+      }
+
+      const link = match?.link || 
+      "https://alison.com/?utm_source=bing&utm_medium=cpc&utm_campaign=530823303&utm_content=1358998875731562&utm_term=kwd-84938561416339:loc-90&msclkid=17ab24110150152f948d4d128d20c956";
+
+      // Save result
+      const attempts =
+        JSON.parse(localStorage.getItem("careerAttempts")) || [];
+      attempts.push({
+        username,
+        email,
+        career: data.career,
+        link,
+        date: new Date().toLocaleString(),
+      });
+      localStorage.setItem("careerAttempts", JSON.stringify(attempts));
+
+      // ✅ Instead of alert, show result card
+      setResult({
+        username,
+        career: data.career,
+        link,
+      });
+      setFinished(true);
+    } catch (error) {
+      console.error(error);
       alert("Server error. Please try again.");
     }
   };
@@ -79,12 +167,9 @@ export default function Quiz12() {
       <div className="relative min-h-screen flex items-center justify-center p-6">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1350&q=80')] bg-cover bg-center opacity-20 blur-sm -z-10" />
 
+        {/* Name + Email Form */}
         {!started && !finished && (
-          <div
-            className="max-w-2xl w-full p-8 rounded-2xl shadow-2xl transition
-                       bg-gradient-to-br from-[#50e5ac] to-[#1158b0]
-                       hover:from-[#168bcf] hover:to-[#dc569e]"
-          >
+          <div className="max-w-2xl w-full p-8 rounded-2xl shadow-2xl transition bg-gradient-to-br from-[#50e5ac] to-[#1158b0] hover:from-[#168bcf] hover:to-[#dc569e]">
             <h1 className="text-3xl text-white font-semibold text-center mb-2">
               🚀 Discover Your Future Career
             </h1>
@@ -106,21 +191,16 @@ export default function Quiz12() {
             />
             <button
               onClick={startQuiz}
-              className="w-full py-3 rounded-md text-lg font-semibold
-                         bg-gradient-to-r from-gray-700 to-purple-700
-                         hover:from-blue-200 hover:to-blue-800 hover:text-black text-white"
+              className="w-full py-3 rounded-md text-lg font-semibold bg-gradient-to-r from-gray-700 to-purple-700 hover:from-blue-200 hover:to-blue-800 hover:text-black text-white"
             >
               Start Quiz
             </button>
           </div>
         )}
 
+        {/* Quiz Section */}
         {started && !finished && (
-          <div
-            className="max-w-4xl w-full p-6 rounded-2xl shadow-2xl transition
-                       bg-gradient-to-br from-[#50e5ac] to-[#1158b0]
-                       hover:from-[#168bcf] hover:to-[#dc569e]"
-          >
+          <div className="max-w-4xl w-full p-6 rounded-2xl shadow-2xl transition bg-gradient-to-br from-[#50e5ac] to-[#1158b0] hover:from-[#168bcf] hover:to-[#dc569e]">
             <h2 className="text-center text-white text-xl font-bold mb-4">
               👋 Welcome <b>{username}</b>, select what you love!
             </h2>
@@ -140,21 +220,18 @@ export default function Quiz12() {
                 <div
                   key={i}
                   onClick={() => toggleCard(i)}
-                  className={`cursor-pointer p-3 text-center font-semibold border-2 rounded-lg
-                     transition ${
-                       selected[i]
-                         ? "bg-blue-500 text-white border-white"
-                         : "bg-white text-black border-pink-100 hover:bg-blue-100"
-                     }`}
+                  className={`cursor-pointer p-3 text-center font-semibold border-2 rounded-lg transition ${
+                    selected[i]
+                      ? "bg-blue-500 text-white border-white"
+                      : "bg-white text-black border-pink-100 hover:bg-blue-100"
+                  }`}
                 >
                   {i + 1}. {feat}
                 </div>
               ))}
               <button
                 type="submit"
-                className="col-span-full mt-6 py-3 rounded-md text-lg font-semibold
-                           bg-gradient-to-r from-gray-700 to-purple-700
-                           hover:from-blue-200 hover:to-blue-800 hover:text-black text-white"
+                className="col-span-full mt-6 py-3 rounded-md text-lg font-semibold bg-gradient-to-r from-gray-700 to-purple-700 hover:from-blue-200 hover:to-blue-800 hover:text-black text-white"
               >
                 Submit Answers
               </button>
@@ -162,23 +239,29 @@ export default function Quiz12() {
           </div>
         )}
 
-        {finished && (
-          <div
-            className="max-w-xl w-full p-8 text-center rounded-2xl shadow-2xl
-                       bg-gradient-to-br from-[#50e5ac] to-[#1158b0]
-                       hover:from-[#168bcf] hover:to-[#dc569e]"
-          >
+        {/* Result Screen */}
+        {finished && result && (
+          <div className="max-w-xl w-full p-8 text-center rounded-2xl shadow-2xl bg-gradient-to-br from-[#50e5ac] to-[#1158b0] hover:from-[#168bcf] hover:to-[#dc569e]">
             <h1 className="text-3xl text-white font-bold mb-2">
-              🎉 You're All Set!
+              🎉 Congratulations, {result.username}!
             </h1>
-            <p className="text-white mb-6">
-              Your recommended career has been saved. 🎓
+            <p className="text-white text-lg mb-4">
+              Recommended Career:{" "}
+              <b className="text-yellow-300">{result.career}</b>
             </p>
+
+            <a
+              href={result.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-2 py-2 px-6 rounded-md bg-white text-blue-700 font-semibold hover:bg-yellow-100 transition"
+            >
+              🎥 Watch Guide
+            </a>
+
             <button
               onClick={() => (window.location.href = "/dashboard")}
-              className="w-full py-3 rounded-md text-lg font-semibold
-                         bg-gradient-to-r from-gray-700 to-purple-700
-                         hover:from-blue-200 hover:to-blue-800 hover:text-black text-white"
+              className="w-full mt-6 py-3 rounded-md text-lg font-semibold bg-gradient-to-r from-gray-700 to-purple-700 hover:from-blue-200 hover:to-blue-800 hover:text-black text-white"
             >
               Go to Dashboard
             </button>
