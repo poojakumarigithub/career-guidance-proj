@@ -1,0 +1,31 @@
+{
+  "science": {
+    "title": "Science Stream Resources",
+    "resources": [
+      { "name": "NCERT Physics", "url": "https://ncert.nic.in/textbook.php" },
+      { "name": "Byju's Science Classes", "url": "https://byjus.com/class-11-12/" },
+      { "name": "Vedantu Science", "url": "https://www.vedantu.com/courses" },
+      { "name": "Khan Academy ", "url": "https://www.khanacademy.org/" }
+    ]
+  },
+
+  "commerce": {
+    "title": "Commerce Stream Resources",
+    "resources": [
+      { "name": "NCERT Accountancy", "url": "https://ncert.nic.in/textbook.php" },
+      { "name": "Byju's Commerce", "url": "https://byjus.com/commerce/" },
+      { "name": "Vedantu Commerce", "url": "https://www.vedantu.com/courses" },
+      { "name": "Khan Academy ", "url": "https://www.khanacademy.org/" }
+    ]
+  },
+
+  "arts": {
+    "title": "Arts / Humanities Resources",
+    "resources": [
+      { "name": "NCERT Arts Subjects", "url": "https://ncert.nic.in/textbook.php" },
+      { "name": "Byju's History", "url": "https://byjus.com/history/" },
+      { "name": "Vedantu Political Science", "url": "https://www.vedantu.com/courses" },
+      { "name": "Khan Academy ", "url": "https://www.khanacademy.org/" }
+    ]
+  }
+}

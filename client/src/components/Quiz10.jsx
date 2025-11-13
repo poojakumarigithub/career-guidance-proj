@@ -213,10 +213,19 @@ export default function Quiz10() {
       </div>
 
       {result && (
-        <div className="text-center mt-6 text-xl font-bold text-gray-900 bg-white p-4 rounded">
+        <div
+          className="text-center mt-6 text-xl font-bold text-gray-900 bg-white p-4 rounded cursor-pointer"
+          onClick={() => {
+            const stream = result
+              .replace("Recommended Career: ", "")
+              .trim()
+              .toLowerCase();
+            window.location.href = `/career?stream=${stream}`;
+          }}
+        >
           {result}
         </div>
       )}
     </div>
   );
-}
+} 

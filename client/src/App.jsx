@@ -13,6 +13,7 @@ import ContactUs from './pages/ContactUs'
 // ✅ Import your quiz pages
 import Quiz10 from './pages/Quiz10Page'
 import Quiz12 from './pages/Quiz12Page'
+import CareerPage from "./CareerPage";
 // import Quiz10Page from './pages/Quiz10Page'
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
           {/* ✅ New quiz routes */}
           <Route path="/quiz-10" element={<Quiz10 />} />
           <Route path="/quiz-12" element={<Quiz12 />} />
+          <Route path="/career" element={<CareerPage />} />
         </Routes>
       </main>
 
