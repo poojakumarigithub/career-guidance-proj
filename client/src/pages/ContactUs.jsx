@@ -15,7 +15,7 @@ export default function ContactUs() {
             </p>
             <div className="space-y-4">
               <p>📍 Karnal, Haryana</p>
-              <p>📧 our@gmail.com</p>
+              <p>📧 Career@gmail.com</p>
               <p>📞 903-xxx-xxxx</p>
             </div>
             <div className="mt-6">

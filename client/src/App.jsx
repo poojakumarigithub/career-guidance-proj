@@ -14,6 +14,8 @@ import ContactUs from './pages/ContactUs'
 import Quiz10 from './pages/Quiz10Page'
 import Quiz12 from './pages/Quiz12Page'
 import CareerPage from "./CareerPage";
+import MentalHealthSection from './components/mentalHealthSection'
+
 // import Quiz10Page from './pages/Quiz10Page'
 
 function App() {
@@ -32,7 +34,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/reset" element={<ResetPassword />} />
-
+          <Route path="/mental-health" element={<MentalHealthSection />} />
           {/* ✅ New quiz routes */}
           <Route path="/quiz-10" element={<Quiz10 />} />
           <Route path="/quiz-12" element={<Quiz12 />} />

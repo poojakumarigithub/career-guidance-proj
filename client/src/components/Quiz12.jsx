@@ -202,7 +202,7 @@ export default function Quiz12() {
         {started && !finished && (
           <div className="max-w-4xl w-full p-6 rounded-2xl shadow-2xl transition bg-gradient-to-br from-[#50e5ac] to-[#1158b0] hover:from-[#168bcf] hover:to-[#dc569e]">
             <h2 className="text-center text-white text-xl font-bold mb-4">
-              👋 Welcome <b>{username}</b>, select what you love!
+               Welcome <b>{username}</b>, select what you love!
             </h2>
 
             <div className="w-full bg-gray-300 rounded-full h-3 mb-6">
@@ -256,15 +256,15 @@ export default function Quiz12() {
               rel="noopener noreferrer"
               className="inline-block mt-2 py-2 px-6 rounded-md bg-white text-blue-700 font-semibold hover:bg-yellow-100 transition"
             >
-              🎥 Watch Guide
+              Courses Link
             </a>
 
-            <button
+            {/* <button
               onClick={() => (window.location.href = "/dashboard")}
               className="w-full mt-6 py-3 rounded-md text-lg font-semibold bg-gradient-to-r from-gray-700 to-purple-700 hover:from-blue-200 hover:to-blue-800 hover:text-black text-white"
             >
               Go to Dashboard
-            </button>
+            </button> */}
           </div>
         )}
       </div>
