@@ -15,8 +15,8 @@ export default function Footer() {
           <div>
             <h3 className="font-bold mb-2 text-gray-900">Quick Links</h3>
             <Link to="/resources" className="block hover:text-indigo-500 text-[15px] font-bold text-gray-700">Resources</Link>
-            <Link to="/courses" className="block hover:text-indigo-500 text-[15px] font-bold text-gray-700">Courses</Link>
-            <Link to="/stories" className="block hover:text-indigo-500 text-[15px] font-bold text-gray-700" >Stories</Link>
+            <Link to="/stories" className="block hover:text-indigo-500 text-[15px] font-bold text-gray-700">Stories</Link>
+            <Link to="/mental-health" className="block hover:text-indigo-500 text-[15px] font-bold text-gray-700" >Wellness & Support</Link>
           </div>
 
           {/* Others */}

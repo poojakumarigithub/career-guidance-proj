@@ -10,12 +10,13 @@ import Register from './pages/Register'
 import ResetPassword from './pages/ResetPassword'
 import ContactUs from './pages/ContactUs'
 
-// ✅ Import your quiz pages
+//  Import your quiz pages
 import Quiz10 from './pages/Quiz10Page'
 import Quiz12 from './pages/Quiz12Page'
 import CareerPage from "./CareerPage";
 import MentalHealthSection from './components/mentalHealthSection'
-
+import Resources from './pages/Resources'
+import Stories from './pages/Stories'
 // import Quiz10Page from './pages/Quiz10Page'
 
 function App() {
@@ -35,7 +36,9 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/reset" element={<ResetPassword />} />
           <Route path="/mental-health" element={<MentalHealthSection />} />
-          {/* ✅ New quiz routes */}
+          <Route path="/resources" element={<Resources />} />
+          <Route path="/stories" element={<Stories />} />
+          {/*  New quiz routes */}
           <Route path="/quiz-10" element={<Quiz10 />} />
           <Route path="/quiz-12" element={<Quiz12 />} />
           <Route path="/career" element={<CareerPage />} />
