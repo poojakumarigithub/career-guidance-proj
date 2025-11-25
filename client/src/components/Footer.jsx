@@ -30,7 +30,8 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h3 className="font-bold mb-2 text-gray-900">Contact</h3>
-            <p className="hover:text-indigo-500 cursor-pointer font-bold text-gray-700">Career@gmail.com</p>
+            <p className="hover:text-indigo-500 cursor-pointer font-bold text-gray-700">careers4guidance@gmail.com
+</p>
             <div className="flex gap-3 mt-2">
               <Link><i className="bx bxl-facebook text-xl"></i></Link>
               <Link><i className="bx bxl-twitter text-xl"></i></Link>
