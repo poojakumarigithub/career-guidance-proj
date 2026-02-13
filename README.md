@@ -66,7 +66,8 @@ A web-based system that helps students discover suitable career options based on
 <img width="1816" height="908" alt="Screenshot 2025-06-25 150948" src="https://github.com/user-attachments/assets/e715e599-ee79-4647-b295-80827e1cd430" />
 
 
-<img width="472" height="742" alt="Screenshot 2026-02-13 152523" src="https://github.com/user-attachments/assets/773e7e2e-ae4c-4734-96cc-d3fa4bfd1714" />
+<img width="485" height="768" alt="Screenshot 2026-02-13 222013" src="https://github.com/user-attachments/assets/93c560bb-d0cd-4327-8754-1b8be3269253" />
+
 
 
 ## To run this :
