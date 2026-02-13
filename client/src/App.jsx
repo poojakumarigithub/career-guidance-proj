@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import Chatbot from './components/Chatbot'   // chatbot
 
 import Home from './pages/Home'
 import About from './pages/About'
@@ -10,18 +11,17 @@ import Register from './pages/Register'
 import ResetPassword from './pages/ResetPassword'
 import ContactUs from './pages/ContactUs'
 
-//  Import your quiz pages
 import Quiz10 from './pages/Quiz10Page'
 import Quiz12 from './pages/Quiz12Page'
 import CareerPage from "./CareerPage";
-import MentalHealthSection from './components/mentalHealthSection'
+import MentalHealthSection from './components/MentalHealthSection'
 import Resources from './pages/Resources'
 import Stories from './pages/Stories'
-// import Quiz10Page from './pages/Quiz10Page'
 
 function App() {
   return (
     <div className="min-h-screen flex flex-col">
+      
       {/* Navbar always visible */}
       <Navbar />
 
@@ -38,7 +38,6 @@ function App() {
           <Route path="/mental-health" element={<MentalHealthSection />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/stories" element={<Stories />} />
-          {/*  New quiz routes */}
           <Route path="/quiz-10" element={<Quiz10 />} />
           <Route path="/quiz-12" element={<Quiz12 />} />
           <Route path="/career" element={<CareerPage />} />
@@ -47,6 +46,10 @@ function App() {
 
       {/* Footer always visible */}
       <Footer />
+
+      {/*  AI Chatbot Popup (Global) */}
+      <Chatbot />
+
     </div>
   )
 }

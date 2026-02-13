@@ -13,11 +13,11 @@ export default function ContactUs() {
             <p className="text-gray-600 mb-6">
               Have something on your mind? Drop us a message and we'll get back to you as soon as possible!
             </p>
-            <div className="space-y-4">
+            {/* <div className="space-y-4">
               <p>📍 Karnal, Haryana</p>
               <p>📧 Career@gmail.com</p>
               <p>📞 903-xxx-xxxx</p>
-            </div>
+            </div> */}
             <div className="mt-6">
               <p className="mb-2">Connect with us!</p>
               <div className="flex gap-4 text-xl">
