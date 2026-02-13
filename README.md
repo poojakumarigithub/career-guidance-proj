@@ -75,7 +75,9 @@ npm run dev
 
 cd server ->
 for 10th quiz : cd 10th -> python server.py
+
 for 12th quiz: cd 12th -> python app.py
+
 for chatbot: cd chatbot -> python main.py
 
 
