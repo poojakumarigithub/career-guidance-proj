@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Chatbot() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
 
   const bottomRef = useRef(null);
+  const navigate = useNavigate(); // 🔥 added
 
   const toggleChat = () => setOpen(!open);
 
@@ -37,17 +39,23 @@ export default function Chatbot() {
         setMessages([
           {
             sender: "bot",
-            text:
-              "Hi 👋\n\nHow can I help you today?"
+            text: "Hi 👋\n\nHow can I help you today?"
           }
         ]);
       }, 800);
     }
   }, []);
 
+  // 🔥 UPDATED FUNCTION
   const sendMessage = async (customMessage = null) => {
     const message = customMessage || input;
     if (!message.trim()) return;
+
+    // ✅ REDIRECT LOGIC
+    if (message === "quiz" || message === "content") {
+      navigate("/register");
+      return;
+    }
 
     setMessages(prev => [...prev, { sender: "user", text: message }]);
     setInput("");
@@ -136,7 +144,6 @@ export default function Chatbot() {
           <div className="flex-1 p-4 overflow-y-auto text-sm space-y-3">
             {messages.map((msg, i) => {
 
-              // 🔥 Button Rendering
               if (msg.sender === "buttons") {
                 return (
                   <div key={i} className="space-y-2">

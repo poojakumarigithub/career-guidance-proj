@@ -4,15 +4,12 @@ import DarkToggle from "./DarkToggle";
 export default function Quiz12() {
   const [features, setFeatures] = useState([]);
   const [dark, setDark] = useState(false);
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [started, setStarted] = useState(false);
+  const [started, setStarted] = useState(true); // directly start quiz
   const [selected, setSelected] = useState([]);
   const [finished, setFinished] = useState(false);
   const [careerLinks, setCareerLinks] = useState([]);
-  const [result, setResult] = useState(null); // <-- new state for showing result card
+  const [result, setResult] = useState(null);
 
-  // Fetch quiz features and degree-link data
   useEffect(() => {
     fetch("/quiz12Features.json")
       .then((res) => res.json())
@@ -21,7 +18,6 @@ export default function Quiz12() {
         setSelected(Array(data.length).fill(0));
       });
 
-    // coursesLinks.json contains degree -> link mapping for 12th quiz
     fetch("/coursesLinks.json")
       .then((res) => res.json())
       .then((data) => setCareerLinks(data))
@@ -37,20 +33,12 @@ export default function Quiz12() {
   const progress = selected.filter((v) => v === 1).length;
   const progressPct = features.length ? (progress / features.length) * 100 : 0;
 
-  const startQuiz = () => {
-    if (!username.trim() || !email.trim()) {
-      alert("Please enter both name and email!");
-      return;
-    }
-    setStarted(true);
-  };
-
-  // Normalize text for matching
   const normalize = (str) =>
     str.toLowerCase().replace(/[^a-z0-9]/g, "").trim();
 
   const submitQuiz = async (e) => {
     e.preventDefault();
+
     if (!selected.includes(1)) {
       alert("Please select at least one interest!");
       return;
@@ -60,7 +48,7 @@ export default function Quiz12() {
       const res = await fetch("http://localhost:5000/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, answers: selected }),
+        body: JSON.stringify({ answers: selected }), // removed username & email
       });
 
       const data = await res.json();
@@ -71,7 +59,6 @@ export default function Quiz12() {
 
       const normalizedCareer = normalize(data.career);
 
-      // Keyword-based mapping
       const keywordMap = {
         computer: "B.Tech - Computer Science and Engineering",
         software: "B.Tech - Computer Science and Engineering",
@@ -117,7 +104,6 @@ export default function Quiz12() {
         }
       }
 
-      // Find YouTube link
       let match = null;
       if (matchedDegree) {
         match = careerLinks.find(
@@ -133,27 +119,25 @@ export default function Quiz12() {
         });
       }
 
-      const link = match?.link || 
-      "https://alison.com/?utm_source=bing&utm_medium=cpc&utm_campaign=530823303&utm_content=1358998875731562&utm_term=kwd-84938561416339:loc-90&msclkid=17ab24110150152f948d4d128d20c956";
+      const link =
+        match?.link ||
+        "https://alison.com/?utm_source=bing&utm_medium=cpc&utm_campaign=530823303";
 
-      // Save result
+      // Save result (without user info)
       const attempts =
         JSON.parse(localStorage.getItem("careerAttempts")) || [];
       attempts.push({
-        username,
-        email,
         career: data.career,
         link,
         date: new Date().toLocaleString(),
       });
       localStorage.setItem("careerAttempts", JSON.stringify(attempts));
 
-      // ✅ Instead of alert, show result card
       setResult({
-        username,
         career: data.career,
         link,
       });
+
       setFinished(true);
     } catch (error) {
       console.error(error);
@@ -167,42 +151,11 @@ export default function Quiz12() {
       <div className="relative min-h-screen flex items-center justify-center p-6">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1350&q=80')] bg-cover bg-center opacity-20 blur-sm -z-10" />
 
-        {/* Name + Email Form */}
-        {!started && !finished && (
-          <div className="max-w-2xl w-full p-8 rounded-2xl shadow-2xl transition bg-gradient-to-br from-[#50e5ac] to-[#1158b0] hover:from-[#168bcf] hover:to-[#dc569e]">
-            <h1 className="text-3xl text-white font-semibold text-center mb-2">
-              🚀 Discover Your Future Career
-            </h1>
-            <p className="text-white text-center mb-4">
-              Choose your passions and we’ll guide your path!
-            </p>
-            <input
-              className="w-full p-3 rounded-md mb-4 outline-none"
-              placeholder="Enter Your Name"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-              className="w-full p-3 rounded-md mb-4 outline-none"
-              placeholder="Enter Your Email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <button
-              onClick={startQuiz}
-              className="w-full py-3 rounded-md text-lg font-semibold bg-gradient-to-r from-gray-700 to-purple-700 hover:from-blue-200 hover:to-blue-800 hover:text-black text-white"
-            >
-              Start Quiz
-            </button>
-          </div>
-        )}
-
         {/* Quiz Section */}
         {started && !finished && (
           <div className="max-w-4xl w-full p-6 rounded-2xl shadow-2xl transition bg-gradient-to-br from-[#50e5ac] to-[#1158b0] hover:from-[#168bcf] hover:to-[#dc569e]">
             <h2 className="text-center text-white text-xl font-bold mb-4">
-               Welcome <b>{username}</b>, select what you love!
+              Select what you love!
             </h2>
 
             <div className="w-full bg-gray-300 rounded-full h-3 mb-6">
@@ -229,6 +182,7 @@ export default function Quiz12() {
                   {i + 1}. {feat}
                 </div>
               ))}
+
               <button
                 type="submit"
                 className="col-span-full mt-6 py-3 rounded-md text-lg font-semibold bg-gradient-to-r from-gray-700 to-purple-700 hover:from-blue-200 hover:to-blue-800 hover:text-black text-white"
@@ -239,12 +193,13 @@ export default function Quiz12() {
           </div>
         )}
 
-        {/* Result Screen */}
+        {/* Result */}
         {finished && result && (
-          <div className="max-w-xl w-full p-8 text-center rounded-2xl shadow-2xl bg-gradient-to-br from-[#50e5ac] to-[#1158b0] hover:from-[#168bcf] hover:to-[#dc569e]">
+          <div className="max-w-xl w-full p-8 text-center rounded-2xl shadow-2xl bg-gradient-to-br from-[#50e5ac] to-[#1158b0]">
             <h1 className="text-3xl text-white font-bold mb-2">
-              🎉 Congratulations, {result.username}!
+              🎉 Your Result
             </h1>
+
             <p className="text-white text-lg mb-4">
               Recommended Career:{" "}
               <b className="text-yellow-300">{result.career}</b>
@@ -258,13 +213,6 @@ export default function Quiz12() {
             >
               Courses Link
             </a>
-
-            {/* <button
-              onClick={() => (window.location.href = "/dashboard")}
-              className="w-full mt-6 py-3 rounded-md text-lg font-semibold bg-gradient-to-r from-gray-700 to-purple-700 hover:from-blue-200 hover:to-blue-800 hover:text-black text-white"
-            >
-              Go to Dashboard
-            </button> */}
           </div>
         )}
       </div>

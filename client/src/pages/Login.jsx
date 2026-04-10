@@ -29,7 +29,7 @@ export default function Login() {
               <label className="block mb-1">Email</label>
               <input
                 type="email"
-                placeholder="enter your email"
+                placeholder="Enter your email here.."
                 name="email"
                 className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
               />
@@ -39,7 +39,7 @@ export default function Login() {
               <label className="block mb-1">Password</label>
               <input
                 type="password"
-                placeholder="enter password"
+                placeholder="Enter password here.."
                 name="password"
                 className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
               />

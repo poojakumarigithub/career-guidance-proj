@@ -38,7 +38,7 @@ export default function Register() {
               <label className="block mb-1">Email</label>
               <input
                 type="email"
-                placeholder="register email here..."
+                placeholder="Enter your email here..."
                 name="email"
                 className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
               />
@@ -48,7 +48,7 @@ export default function Register() {
               <label className="block mb-1">Password</label>
               <input
                 type="password"
-                placeholder="your psw..."
+                placeholder="Enter your psw..."
                 name="password"
                 className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
               />
